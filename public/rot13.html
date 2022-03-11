@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rot13 Cipher</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<ul class="navbar">
+			<li class="sites"><a href="index.html">Home</a></li>	
+			<li class="sites"><a href="goals.html">Goals</a></li>
+			<li class="sites"><a href="evidence.html">Evidence</a></li>
+			<li class="sites"><a href="rivals.html">Rivals</a></li>
+            <li class="sites"><a href="rot13.html">Rot13 Cipher</a></li>
+		</ul>
+		<div class="row">
+			<div class="column">
+				<h1>Ed Sheeran Doesn't Exist</h1>
+				<h2>Rot13 Cipher</h2>
+				
+                <p>Text to encrypt:</p>
+                <input type="text" id="input" class="input-text"><br>
+                <input type="submit" value="Submit" onclick="encrypt()"><br><br>
+
+                <p>Encrypted Text:</p>
+                <p id="output"></p>
+
+			</div>
+            <div class="column">
+				<img class="ed" src="eddie.png" alt="No Ed Sheeran">
+			</div>
+		</div>
+
+        <script>
+            function encrypt(){
+                var xhr = new XMLHttpRequest();
+                var pt = document.getElementById("input").value;
+
+                xhr.open("GET", "http://localhost:3000/encrypt?plaintext=" + pt, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                xhr.onreadystatechange = update;
+                xhr.send();
+            }
+
+            function update(){
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                    document.getElementById("output").innerHTML = this.responseText;
+                }
+            }
+        </script>
+	</body>
+</html>
